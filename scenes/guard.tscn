@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/guard.gd" type="Script" id=1]
+[ext_resource path="res://assets/guard.png" type="Texture" id=2]
+[ext_resource path="res://assets/guard-light.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 6.46048, 8.0523 )
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="Node2D" type="Node2D" parent="." index="0"]
+
+position = Vector2( 13.6034, 0.285026 )
+rotation = -1.57754
+scale = Vector2( 1, 1.29946 )
+
+[node name="LightArea" type="Area2D" parent="Node2D" index="0"]
+
+position = Vector2( 13.3332, 2.36461 )
+scale = Vector2( 2.58919, 3.41537 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/LightArea" index="0"]
+
+position = Vector2( -5.56101, -4.16191 )
+build_mode = 0
+polygon = PoolVector2Array( 0.169891, 0.17675, 17.2986, 24.9475, 13.2373, 28.7267, 7.81776, 31.6987, 3.62198, 32.5729, -3.5458, 32.7477, -9.93359, 30.936, -14.3477, 27.9214, -17.5733, 24.3748 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Node2D" index="1"]
+
+visible = false
+position = Vector2( -1.76068, 35.1175 )
+scale = Vector2( 0.57413, 0.674904 )
+texture = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="Node2D" index="2"]
+
+position = Vector2( -0.900575, -2.42071 )
+rotation = 0.00624466
+scale = Vector2( 1, 0.882605 )
+enabled = true
+editor_only = false
+texture = ExtResource( 3 )
+offset = Vector2( 0, 60 )
+texture_scale = 1.0
+color = Color( 0.949219, 0.930998, 0.812027, 1 )
+energy = 0.4
+mode = 0
+range_height = 0.0
+range_z_min = -1024
+range_z_max = 1024
+range_layer_min = 0
+range_layer_max = 0
+range_item_cull_mask = 1
+shadow_enabled = true
+shadow_color = Color( 0.0249386, 0.00457764, 0.0976562, 0 )
+shadow_buffer_size = 2048
+shadow_gradient_length = 0.0
+shadow_filter = 0
+shadow_filter_smooth = 0.0
+shadow_item_cull_mask = 1
+_sections_unfolded = [ "Range", "Shadow", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 8.05247, 0.0407491 )
+rotation = -1.57754
+scale = Vector2( 1.64977, 1.96545 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Z Index" ]
+
+

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="NavigationPolygon" id=1]
+
+vertices = PoolVector2Array( -5, -5, 5, -5, 5, 5, -5, 5 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -5, -5, 5, -5, 5, 5, -5, 5 ) ]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance"]
+
+navpoly = SubResource( 1 )
+enabled = true
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+
