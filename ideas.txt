@@ -1,0 +1,35 @@
+Make a
+Racing Game
+A game in which the player drives a vehicle of some kind and races against either other players or time.
+-
+First-Person Shooter (FPS)
+A game in which the perspective is through the eyes of the player character, and the action revolves around shooting.
+game for Ludum Dare 41!
+
+
+ Make a
+Fighting Game
+An Action Game that is primarily about one-on-one fights between two (or rarely more) equally skilled opponents.
+-
+Survival Sandbox
+A game where the primary objective is to survive for as long as possible in a hostile environment. Also known as Survival Game.
+game for Ludum Dare 41! 
+
+
+Make a
+Platform Game (Platformer)
+A game in which jumping is an important action for navigating the environment. Leaping and climbing between platforms of varying heights and over or onto enemy characters forms a large part of the gameplay.
+-
+Strategy RPG (SRPG)
+A game that is a Role Playing Game, but it plays like a Turn Based Strategy or Real Time Strategy.
+game for Ludum Dare 41!
+
+ Make a
+Real-Time Strategy (RTS)
+A game that focuses on construction and control of a fighting force in battle that takes place in real-time.
+-
+Environmental Narrative Game
+A story-driven adventure game which emphasizes narrative and exploring a physical location, with very little in the way of interactivity or gameplay challenge. Also known by other labels including 'walking simulator', 'story exploration game' and 'interactive stories'.
+game for Ludum Dare 41! 
+
+

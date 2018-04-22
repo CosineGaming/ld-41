@@ -1,9 +1,8 @@
 extends KinematicBody2D
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
 onready var anim = get_node("Sprite/AnimationPlayer")
+onready var hud = get_node("HUD/Control")
+var carrying = {}
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -33,11 +32,13 @@ func _process(delta):
 		if anim.is_playing() and anim.current_animation != "slow_down":
 			anim.play("slow_down")
 
-	if get_slide_count():
-		var collider = get_slide_collision(0).collider
+	for i in range(get_slide_count()):
+		var collider = get_slide_collision(i).collider
 		if collider.is_in_group("machine"):
-			print("enterred")
+			move_and_slide(-direction * delta) # So when we leave we don't collide again
 			collider.player_entered()
+	
+	hud.get_node("Carrying").text = util.render_resource_list(carrying)
 
 func _anim_finished(anim_name):
 	if anim_name == "speed_up":

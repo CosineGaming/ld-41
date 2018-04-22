@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/machine.tscn" type="PackedScene" id=1]
+
+[node name="Machine" instance=ExtResource( 1 )]
+
+machine_id = "1"
+machine_name = "Yam Masher"
+
+[node name="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 0.974827, -0.258522 )
+
+[node name="Name" parent="." index="3"]
+
+margin_left = -54.0
+margin_top = -38.0
+margin_right = 66.0
+margin_bottom = -17.0
+
+
+[editable path="Management"]

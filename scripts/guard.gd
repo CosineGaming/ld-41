@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 var nav = NodePath("/root/Level/Navigation2D")
+var anim_path = NodePath("Caught/ColorRect/AnimationPlayer")
 
 var target
 var path
@@ -8,6 +9,8 @@ var turning = false
 var turn_target
 
 var running = false
+var running_color = Color(0.86, 0.44, 0.43)
+var  normal_color = Color(0.95, 0.93, 0.81)
 
 onready var light_area = get_node("Node2D/LightArea")
 
@@ -21,16 +24,30 @@ func _process(delta):
 func _physics_process(delta):
 	# Because the raycasting we have to do can only be done in _physics_process
 	running = false
-	if light_area.overlaps_body(util.player):
-		var space_state = get_world_2d().direct_space_state
-		var blocked = space_state.intersect_ray(position, util.player.position, [self, util.player])
-		if not blocked:
-			running = true
-			path = [util.player.position]
-			turning = false
-			rotation = path[0].angle_to_point(position)
+	get_node("Node2D/Light2D").color = normal_color
+	if sees_player():
+		running = true
+		get_node("Node2D/Light2D").color = running_color
+		path = [util.player.position]
+		turning = false
+		rotation = path[0].angle_to_point(position)
+
+func _entered_light(who):
+	if who == util.player:
+		catch_player()
 
 # ---
+
+func sees_player():
+	if light_area.overlaps_body(util.player):
+		var ignore = get_tree().get_nodes_in_group("guard")
+		ignore.append(self)
+		ignore.append(util.player)
+		var space_state = get_world_2d().direct_space_state
+		var blocked = space_state.intersect_ray(position, util.player.position, ignore)
+		if not blocked:
+			return true
+	return false
 
 func follow_path(delta):
 	if not turning:
@@ -45,9 +62,7 @@ func follow_path(delta):
 			# TODO: wait a bit?
 			while path.size() < 1:
 				new_target()
-			# Turn slowly, so we don't just jack over
-			turning = true
-			turn_target = path[0].angle_to_point(position)
+			begin_turn()
 		else:
 			position = position.linear_interpolate(path[0], speed / d)
 	# Don't turn this to else! turning might have just been enabled!
@@ -59,6 +74,12 @@ func follow_path(delta):
 		if sign(turn_target - rotation) != orig_sign:
 			turning = false
 			rotation = turn_target
+			print("done")
+
+func begin_turn():
+	# Turn slowly, so we don't just jack over
+	turning = true
+	turn_target = path[0].angle_to_point(position)
 
 func regenerate_path():
 	path = get_node(nav).get_simple_path(position, target)
@@ -80,4 +101,12 @@ func new_target():
 	regenerate_path()
 	if path.size() == 0:
 		new_target()
+
+func catch_player():
+	util.player.carrying = {}
+	# Teleport away so we don't get stuck on them
+	new_target()
+	position = target
+	new_target()
+	get_node(anim_path).play("fade_in_out")
 

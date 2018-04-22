@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player.png" type="Texture" id=2]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=3]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 
 resource_name = "running"
 length = 1.2
@@ -22,7 +23,7 @@ tracks/0/keys = {
 "values": [ 4, 9, 9 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 
 resource_name = "slow_down"
 length = 0.3
@@ -60,7 +61,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=4]
 
 custom_solver_bias = 0.0
 radius = 13.4909
@@ -89,8 +90,8 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/running = SubResource( 4 )
-anims/slow_down = SubResource( 5 )
+anims/running = SubResource( 1 )
+anims/slow_down = SubResource( 2 )
 anims/speed_up = SubResource( 3 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
@@ -99,7 +100,71 @@ _sections_unfolded = [ "Playback Options" ]
 
 position = Vector2( 0.77349, -0.383388 )
 scale = Vector2( 0.189678, 0.509341 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
+
+[node name="HUD" type="CanvasLayer" parent="." index="2"]
+
+layer = 100
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Control" type="Control" parent="HUD" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 3 )
+_sections_unfolded = [ "Theme" ]
+
+[node name="CarryingLabel" type="Label" parent="HUD/Control" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5.0
+margin_top = 10.0
+margin_right = 69.0
+margin_bottom = 31.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Pocket:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Carrying" type="Label" parent="HUD/Control" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 9.0
+margin_top = 29.0
+margin_right = 135.0
+margin_bottom = 119.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "BBCode", "Grow Direction", "Margin", "Rect" ]
 
 [connection signal="animation_finished" from="Sprite/AnimationPlayer" to="." method="_anim_finished"]
 

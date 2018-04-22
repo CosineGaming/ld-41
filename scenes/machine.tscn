@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/machine.gd" type="Script" id=1]
-[ext_resource path="res://scenes/management.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/machines/machine_0.png" type="Texture" id=2]
+[ext_resource path="res://assets/theme.tres" type="Theme" id=3]
+[ext_resource path="res://scenes/management.tscn" type="PackedScene" id=4]
 
-[node name="Machine" type="StaticBody2D" index="0" groups=[
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 2.8622, 5.18167 )
+
+[node name="Machine" type="StaticBody2D" groups=[
 "machine",
 ]]
 
@@ -15,14 +22,20 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 script = ExtResource( 1 )
+machine_id = ""
 machine_name = ""
-resource_name = ""
-build_rate = 1
+build_rate = 1.0
 count_node = NodePath("Count")
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
+texture = ExtResource( 2 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 0.797558, -1.07972 )
+scale = Vector2( 2.98575, 3.13828 )
+shape = SubResource( 1 )
 
 [node name="Count" type="Label" parent="." index="2"]
 
@@ -30,17 +43,19 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -3.0
-margin_top = 31.0
-margin_right = 37.0
-margin_bottom = 45.0
+margin_left = -20.0
+margin_top = 18.0
+margin_right = 20.0
+margin_bottom = 39.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
+theme = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "0"
+align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -51,27 +66,24 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -55.0
-margin_top = -59.0
-margin_right = 57.0
-margin_bottom = -45.0
+margin_left = -58.0
+margin_top = -37.0
+margin_right = 62.0
+margin_bottom = -16.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
+theme = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "<Machine Name>"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors" ]
+_sections_unfolded = [ "Theme", "custom_colors" ]
 
-[node name="Management" parent="." index="4" instance=ExtResource( 2 )]
-
-[node name="Control" parent="Management" index="0"]
-
-visible = true
+[node name="Management" parent="." index="4" instance=ExtResource( 4 )]
 
 
 [editable path="Management"]
